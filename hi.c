@@ -8,7 +8,7 @@
 
   #include <math.h>
 #define ll long long
-#define f(i, n) for (ll i = 0; i < n; i++)
+
  void merge(int arr[], int l, int m, int r) {
     if(l != r) {
         int L[m - l + 1], R[r - m];

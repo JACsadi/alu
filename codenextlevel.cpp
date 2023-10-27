@@ -8,27 +8,38 @@
 #include <malloc.h>
 #define ll  long long
 #define f(i,n) for(int i = 0; i < n; i++)
-int main() {
-  int t;
-  scanf("%d", &t);
-  while(t--) {
-    char str[81];
-    scanf(" %s", str);
-    int len = strlen(str);
-    if(len < 2) continue; 
-    for(int i = 1; i < len - 1; i++) {
-     if(len % i) continue ;
-      bool flag = 1;
-      f(j, len-i) {
-        if(str[j] != str[j+i]) {
-          flag = 0;
-          break;
-        }
-      }
-      if(flag) {printf("%d\n\n", i);
-          break;
-      }
+int siv[100001] = {0};
+void sieve() {
+    int i = 2;
+   while(i < 100001) {
+    if(siv[i]) {
+        i++;
+        continue;
+    } 
+    int k = 2;
+    while(i*k < 100000) {
+        siv[i*k] = 1;
+        k++;
     }
+    i++;
+  }
+}
+int main() {
+  int n;
+  scanf("%d", &n);
+  n += 1;
+  sieve();
+  int k = 2;
+  int c = 1; 
+  if(n > 3) c++;
+  printf("%d\n", c);
+  for(int i = 2; i <= n;i++) {
+   if(c == 1) printf("1 ");
+   if(!siv[i]) { 
+    printf("2 ");
+   } else {
+   printf("1 ");
+   }
   }
   return 0;
 }
