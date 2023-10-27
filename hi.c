@@ -1,11 +1,15 @@
-#include <stdio.h>
-#include <stdarg.h>
-#include <string.h>
-#include <stdlib.h>
-#include <math.h>
-#define ll  long long
-#define f(i,n) for(ll i = 0; i < n; i++)
-void merge(int arr[], int l, int m, int r) {
+  #include <stdio.h>
+
+  #include <stdarg.h>
+
+  #include <string.h>
+
+  #include <stdlib.h>
+
+  #include <math.h>
+#define ll long long
+#define f(i, n) for (ll i = 0; i < n; i++)
+ void merge(int arr[], int l, int m, int r) {
     if(l != r) {
         int L[m - l + 1], R[r - m];
         for(int i = l; i <= m; i++) L[i-l] = arr[i];
@@ -36,29 +40,44 @@ void sortttt(int arr[], int l,int r) {
     }
     merge(arr,l,mid,r);
 }
-int main() {
+  int main() {
     int t;
     scanf("%d", &t);
     while(t--) {
-        int n,occ = 1, min = 2000000, pc = 0, uni = 0;
+        int n;
         scanf("%d", &n);
-        int *a = (int*) malloc(n*sizeof(int));
-        int *b = (int*) calloc (n , sizeof(n));
-        f(i,n)  scanf("%d", &a[i]);
-        sortttt(a, 0 , n-1);
-        f(i,n) {
-        if(i != 0 && (a[i] == a[i-1] || i == n -1)) {
-            uni++;
-            b[occ]++;
-            occ = 1;
-            continue;
-        } else if(i != 0) occ++;
+        int *a = (int*) malloc(n* sizeof(int));
+        f(i,n) scanf("%d", &a[i]);
+     sortttt(a, 0, n-1);
+     int l = 0, mid , ans, r = a[n-1]; 
+     while(l <= r) {
+      int* b = (int*) malloc(3*sizeof(int));
+      f(i,3) b[i] = 0;
+      mid = (l+r)/2;
+      int flag  = 1;
+      f(i,n) {
+        f(j,3) {
+         if(b[j] == 0) {
+          b[j] = a[i] + mid;
+           break;
+         } 
+         if(abs(b[j] - a[i]) <= mid) {
+          break;
+         } else if(j == 2) {
+          flag = 0;
+          break;
+         } 
         }
-        f(i,n) {
-            if(!b[i]) continue;
-            uni -= b[i];
-            min = min < (n - (b[i]*i) - (uni*i));
-        }
-        printf("%d\n", min);
-    }
-}
+      if(!flag) break;
+      }
+      if(flag) {
+        ans = mid;
+        r = mid - 1;
+      } else l = mid + 1;
+      free(b);
+     }
+     printf("%d\n", ans);
+     free(a);
+  }
+  return 0;
+  }

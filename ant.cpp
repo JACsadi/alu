@@ -1,76 +1,26 @@
-
-void merge(int arr[], int l, int m, int r) {
-    if(l != r) {
-        int L[m - l + 1], R[r - m];
-        for(int i = l; i <= m; i++) L[i-l] = arr[i];
-        for(int i = m + 1; i <= r; i++) R[i - m - 1] = arr[i];
-        int i = 0 , j = 0;
-        while(i + j < r - l + 1) {
-            if(j == r - m) {
-                 arr[l+i+j] = L[i];
-                 i++;
-            } else if(i == m - l + 1) {
-                 arr[l+i+j] = R[j];
-                 j++;
-            } else if(L[i] < R[j]){
-                arr[l+i+j] = L[i];
-                 i++;
-            } else {
-                 arr[l+i+j] = R[j];
-                 j++;
-            }
-        } 
-    }
-}
-void sortttt(int arr[], int l,int r) {
-    int mid = (l+r)/2;
-    if(r > l) {
-        sortttt(arr, l ,mid);
-        sortttt(arr, mid + 1, r);
-    }
-    merge(arr,l,mid,r);
-}
-int bs(int arr[], int r, int value) {
-     int m= (l+r)/2;
-     while(l <= r) {
-     if(arr[m] < value) {
-          return m;
-     } else {
-      r = m -1;      
-     }
-}
- return 1e8 +1;
-}
-#define f(i,n) for(int i = 0; i <n; i++)
-int main() {
-     int t;
-     scanf("%d", &t);
-     while (t--)
-     {
-          int n, m;
-          scanf("%d %d", &n, &m);
-          int *arr = (int*) malloc(n * sizeof(int));
-          f(i,n) scanf("%d", &arr[i]);
-          sortttt(arr, 0, n-1);
-          f(i,m) {
-          int a,b,c;
-          scanf("%d %d %d", &a, &b, &c);
-          if(c <= 0 ) {
-               printf("NO\n");
-               continue;
-          }
-          int k1 = ceil((float)b+(float)sqrt(4*a*c));
-          int k2 = ceil((float)b-(float)sqrt(4*a*c));
-           k1 = bs(arr, n-1, k1);
-           k2 = bs(arr, n-1, k2);
-           if(k1 > 1e8 && k2 > 1e8) {
-                 printf("NO\n");
-               continue;
-           } else {
-             printf("YES");
-             printf("%d\n", k1 < k2 ? k1 : k2);
-           }
-          }
-     }
-     
-}
+ #include <stdio.h>
+ #include <stdlib.h>
+  int main() {
+  while(1) {
+       double c, cl, dm, eee, eeel ,eng, engl, la, sss;
+         printf("Enter your Grade of C\n");
+         scanf("%lf", &c);
+         printf("Enter your Grade of C lab\n");
+         scanf("%lf", &cl);
+         printf("Enter your Grade of DM\n");
+         scanf("%lf", &dm);
+         printf("Enter your Grade of EEE\n");
+         scanf("%lf", &eee);
+         printf("Enter your Grade of EEE lab\n");
+         scanf("%lf", &eeel);
+         printf("Enter your Grade of Eng\n");
+         scanf("%lf", &eng);
+         printf("Enter your Grade of Eng lab\n");
+         scanf("%lf", &engl);
+         printf("Enter your Grade of Linear\n");
+         scanf("%lf", &la);
+         printf("Enter your Grade of SSS\n");
+         scanf("%lf", &sss);
+         printf(" fuck your cgpa isss %lf\n\n\n", ((c*3.0)+(cl*3.0)+(dm*3.0)+(eee*3.0)+(eeel*1.5)+(sss*3.0)+(la*3.0)+(eng*2)+engl)/22.5);
+  }
+  }

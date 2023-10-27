@@ -1,33 +1,38 @@
- #include <stdio.h>
-
-  #include <stdarg.h>
-
-  #include <string.h>
-
-  #include <stdlib.h>
-
-  #include <math.h>
-
-  #define ll long long
-  #define f(i, n) for (ll i = 0; i < n; i++)
+  #include <stdio.h>
+#include <stdarg.h>
+#include <string.h>
+#include <stdlib.h>
+#include <math.h>
+#define ll long long
+#define f(i, n) for (int i = 0; i < n; i++)
   int main() {
     int t;
     scanf("%d", &t);
     while(t--) {
-      int n;
-      ll sum = 0;
-      scanf("%d", &n);
-      ll *a =  (ll*) calloc(2*n,sizeof(ll)); 
-      f(i,n) {
-        ll val;
-        scanf("%lld", &val);
-        val -= i;
-        if(val < 0) val = abs(val) + n;
-        a[val]++;  
-      }  
-      f(i, (2*n)) {
-        if(a[i] > 0) sum += ((long long)a[i] * (long long)(a[i]-1))/2; 
-      }
-      printf("%lld\n", sum);
+        int n, m;
+        scanf("%d %d", &n, &m);
+        int *a = (int*) calloc(n, sizeof(int));
+        int r = 0;
+        f(i,m) {
+            int b;
+            scanf("%d", &b);
+            a[b-1]++;
+            r = r > a[b-1] ? r : a[b-1];
     }
+     int l = 1, mid, ans;
+     while(l <= r) {
+      ll sum = m;
+      mid = (l+r+1) / 2;
+      f(i, n) {
+      sum -=  mid < a[i] ? mid : (a[i] + ((mid -a[i])/2)); 
+      }
+      if(sum > 0) l = mid + 1;
+      else {
+         r = mid - 1;
+         ans = mid;
+      }
+     }
+     printf("%d\n", ans);
+  }
+  return 0;
   }

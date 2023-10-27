@@ -3,67 +3,99 @@
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
-#include <ctype.h>
-#include <stdbool.h>
-#include <malloc.h>
-#define ll  long long
-#define f(i,n) for(int i = 0; i < n; i++)
-bool pancheck(int l, int r, char arr[]) {
-if(l == r) return true;
-  int mid = (l+r)/2 + (l+r) %2;
-  bool flag = true;
-  for(int z = 0; z < mid - l ; z++) {
-    if(arr[l+z] != arr[r-z]) {
-      flag = false;
-      break;
+#define f(i, n) for (int i = 0; i < n; i++)
+ void merge(int** arr, int l, int m, int r) {
+    if(l != r) {
+        int L[m - l + 1], R[r - m];
+        for(int i = l; i <= m; i++) L[i-l] = arr[i][1];
+        for(int i = m + 1; i <= r; i++) R[i - m - 1] = arr[i][1];
+        int i = 0 , j = 0;
+        while(i + j < r - l + 1) {
+            if(j == r - m) {
+                 arr[l+i+j][1] = L[i];
+                 i++;
+            } else if(i == m - l + 1) {
+                 arr[l+i+j][1] = R[j];
+                 j++;
+            } else if(L[i] < R[j]){
+                arr[l+i+j][1] = L[i];
+                 i++;
+            } else {
+                 arr[l+i+j][1] = R[j];
+                 j++;
+            }
+        } 
     }
-  }
-  return flag;
 }
-bool finddd(char*** arr, char brr[], int l , int r) {
-    char *temp = (char *)malloc((r-l + 2) * sizeof(char));
-  strncpy(temp, brr + l, r-l+1);
-  temp[r-l+1] = '\0';
-  bool flag = false;
-  int z = 0;
-  while (arr[r-l][z] != NULL)
-  {
-    if(strcmp(temp, arr[r-l][z]) == 0) {
-      flag = true;
-      break;
+void sortttt(int** arr, int l,int r) {
+    int mid = (l+r)/2;
+    if(r > l) {
+        sortttt(arr, l ,mid);
+        sortttt(arr, mid + 1, r);
     }
-    z++;
-  }
-  if(!flag) {
-    arr[r-l] = (char**) realloc(arr[r-l], (z+2)*sizeof(char*));
-    arr[r-l][z] = (char*)malloc((r-l+2) * sizeof(char));
-    arr[r-l][z+1] = NULL;
-    strncpy(arr[r-l][z], temp, r-l+1);
-    arr[r-l][z][r-l+1] = '\0';
-  }
-  free(temp);
-  return flag;
+    merge(arr,l,mid,r);
+}
+int bs(int **arr, int target, int n, int bl) {
+    int l = 0, r = n, m, ans;
+    while(l <= r) {
+         m = (l+r) / 2 ;
+         if(arr[m][1] == target && arr[m][0] == 0) {
+          if(arr[m-1][1] == target && arr[m-1][0] == 1) r = m - 1;
+          else  l = m+1;
+        }
+        else if(arr[m][1] > target) r = m - 1;
+        else if(arr[m][1] < target) l = m + 1;
+        else {
+          if(bl) r = m - 1;
+          else l = m+1;
+          ans = m ;
+        }
+    }
+    // printf("%dhh\n", ans);
+    arr[ans][0] = 0;
+    return ans;
 }
 int main() {
-    char str[81];
-   while(scanf(" %s", str) != EOF) {
-    int k = strlen(str);
-    char*** a = (char***) malloc((k+1)*sizeof(char**));
-    f(i,k+1) {
-      a[i] = (char**) malloc(1*sizeof(char*));
-      a[i][0] = NULL;
-      }
-    int sum = 0;
-    f(i,k) {
-      f(j,(k-i)) {
-          if(pancheck(i,j+i,str)) {
-          if(!finddd(a, str , i, j+i))  
-          sum++;
+       int n, k;
+       scanf("%d %d", &n, &k);
+       int *unsort = (int*) malloc(n*sizeof(int));
+       int **sort = (int**) malloc((n+1)*sizeof(int*));
+       f(i,n) {
+         scanf("%d", &unsort[i]);
+         sort[i] = (int*) calloc(2,sizeof(int));
+         sort[i][0] = 1;
+         sort[i][1] = unsort[i];
+       }
+       sortttt(sort, 0, n-1);
+    int l = 0, r = n-1, index = ((n+1) / 2) -1, h = sort[index][1];  
+      for(int i = n - 1; i >= k; i--) {
+          int z, kkk;
+           if(unsort[l] <= unsort[r]) {
+              z = unsort[l];
+              l++;
+              kkk = bs(sort, z, n-1, 1);
+           } else {
+            z = unsort[r];
+            r--;
+            kkk = bs(sort, z, n-1, 0);
+           }  
+        //   printf("%d %d\n", kkk, index);
+          if(i & 1) {
+              if(kkk > index) continue;
+              else {
+                do index++;
+                while (!sort[index][0]);
+                h = h > sort[index][1] ? h : sort[index][1];
+              }
+          } else {
+             if(kkk < index) continue;
+              else {
+                do index--;
+                while (!sort[index][0]);
+                h = h > sort[index][1] ? h : sort[index][1];
+              }
           }
       }
-    } 
-     printf("The string '%s' contains %d palindromes.\n", str, sum);
-     free(a);
-    }
+      printf("%d\n", h);
     return 0;
 }
