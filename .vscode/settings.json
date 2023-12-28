@@ -5,6 +5,10 @@
     "xstring": "cpp",
     "map": "cpp",
     "cmath": "cpp",
-    "bit": "c"
+    "bit": "c",
+    "stdlib.h": "c",
+    "bitset": "cpp",
+    "utility": "cpp",
+    "span": "cpp"
   }
 }
