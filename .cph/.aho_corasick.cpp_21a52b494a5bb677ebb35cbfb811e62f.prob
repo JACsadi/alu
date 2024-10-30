@@ -1,0 +1,1 @@
+{"name":"Local: aho_corasick","url":"c:\\Users\\Sadi\\Desktop\\c++\\probsolving\\mptlpc\\aho_corasick.cpp","tests":[{"id":1729342336069,"input":"aybabtu\n3\nbab\nabc\na","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\Sadi\\Desktop\\c++\\probsolving\\mptlpc\\aho_corasick.cpp","group":"local","local":true}

@@ -1,0 +1,1 @@
+{"name":"Local: q","url":"c:\\Users\\Sadi\\Desktop\\c++\\probsolving\\mptlpc\\q.cpp","tests":[{"id":1727943963466,"input":"1 100 1 100\n","output":"1 12\n5 12\n7 12\n11 12"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\Sadi\\Desktop\\c++\\probsolving\\mptlpc\\q.cpp","group":"local","local":true}

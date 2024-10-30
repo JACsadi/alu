@@ -1,71 +1,72 @@
-  #include <stdio.h>
-
-  #include <stdarg.h>
-
-  #include <string.h>
-
-  #include <stdlib.h>
-
-  #include <math.h>
-
-  #define ll long long
-  #define f(i, n) for (ll i = 0; i < n; i++)
-    int main() {
-      int t;
-      scanf("%d", &t);
-      while (t--) {
-        int n, f, w;
-        scanf("%d %d %d", &w, &f, &n);
-        int ** a = (int**) malloc(n * sizeof(int*));
-        f(i, n) {
-          a[i] = (int * ) calloc(4 , sizeof(int)); // sum , time, wrem,trem
-          scanf("%d", &a[i][0]);
-          if (i > 0) a[i][0] += a[i - 1][0];
-          if (w > f) {
-            a[i][1] = (a[i][0] / w) + ((a[i][0] % w == 0) ? 0 : 1);
-            a[i][2] = (a[i][1] * w) - (a[i][0]);
-            a[i][3] = (a[i][1] * f);
-          } else {
-            a[i][1] = (a[i][0] / f) + ((a[i][0] % f == 0) ? 0 : 1);
-            a[i][3] = (a[i][1] * f) - (a[i][0]);
-            a[i][2] = (a[i][1] * w);
-          }
-          printf("%d\n", a[i][1]);
-          f(j, i) {
-            int k = a[i][0] - a[j][0];
-            int t = a[j][1];
-            int wrem = a[j][2];
-            int frem = a[j][3];
-            int key = 0;
-            key = a[i][1] <= (t + (((k - wrem < 0 ? 0 : k - wrem)) / w) + (((k - wrem < 0 ? 0 : k - wrem)) % w > 0 ? 1 : 0))
-             ? (a[i][1] <= (t + (((k - frem < 0 ? 0 : k - frem)) / f) + (((k - frem < 0 ? 0 : k - frem)) % f > 0 ? 1 : 0)) ?
-              0 : 2 )
-              : ((t + (((k - wrem < 0 ? 0 : k - wrem)) / w) + (((k - wrem < 0 ? 0 : k - wrem)) % w > 0 ? 1 : 0)) == (t + (((k - frem < 0 ? 0 : k - frem)) / f) + (((k - frem < 0 ? 0 : k - frem)) % f > 0 ? 1 : 0))
-               ? 3 : ((t + (((k - wrem < 0 ? 0 : k - wrem)) / w) + (((k - wrem < 0 ? 0 : k - wrem)) % w > 0 ? 1 : 0)) < (t + (((k - frem < 0 ? 0 : k - frem)) / f) + (((k - frem < 0 ? 0 : k - frem)) % f > 0 ? 1 : 0))
-               ? 1 : 2));
-                 printf("%d\n", a[i][1]);
-           if(key == 1) {
-              a[i][1] = (t + (((k - wrem < 0 ? 0 : k - wrem)) / w) + (((k - wrem < 0 ? 0 : k - wrem)) % w > 0 ? 1 : 0));
-              a[i][2] = (((k - wrem < 0 ? 0 : k - wrem)) / w) + (((k - wrem < 0 ? 0 : k - wrem)) % w > 0 ? 1 : 0)*w - k + wrem;
-              a[i][3] = (((k - wrem < 0 ? 0 : k - wrem)) / w) + (((k - wrem < 0 ? 0 : k - wrem)) % w > 0 ? 1 : 0)*f + frem;
-           } else if(key == 2) {
-             a[i][1] = (t + (((k - frem < 0 ? 0 : k - frem)) / f) + (((k - frem < 0 ? 0 : k - frem)) % f > 0 ? 1 : 0));
-              a[i][2] = (((k - frem < 0 ? 0 : k - frem)) / f) + (((k - frem < 0 ? 0 : k - frem)) % f > 0 ? 1 : 0)*w + wrem;
-              a[i][3] = (((k - frem < 0 ? 0 : k - frem)) / f) + (((k - frem < 0 ? 0 : k - frem)) % f > 0 ? 1 : 0)*f + frem - k;
-           } if(key == 3) {
-            if(f>w) {
-              a[i][1] = (t + (((k - wrem < 0 ? 0 : k - wrem)) / w) + (((k - wrem < 0 ? 0 : k - wrem)) % w > 0 ? 1 : 0));
-              a[i][2] = (((k - wrem < 0 ? 0 : k - wrem)) / w) + (((k - wrem < 0 ? 0 : k - wrem)) % w > 0 ? 1 : 0)*w - k + wrem;
-              a[i][3] = (((k - wrem < 0 ? 0 : k - wrem)) / w) + (((k - wrem < 0 ? 0 : k - wrem)) % w > 0 ? 1 : 0)*f + frem;
-            } else {
-                a[i][1] = (t + (((k - frem < 0 ? 0 : k - frem)) / f) + (((k - frem < 0 ? 0 : k - frem)) % f > 0 ? 1 : 0));
-              a[i][2] = (((k - frem < 0 ? 0 : k - frem)) / f) + (((k - frem < 0 ? 0 : k - frem)) % f > 0 ? 1 : 0)*w + wrem;
-              a[i][3] = (((k - frem < 0 ? 0 : k - frem)) / f) + (((k - frem < 0 ? 0 : k - frem)) % f > 0 ? 1 : 0)*f + frem - k;
+   #include <bits/stdc++.h>
+   #define ll long long
+   #define ull unsigned long long
+   #define f(i, n) for(int i = 0; i < (n); i++)
+   #define sd(i) scanf(" %d", &i)
+   #define tcase int t;sd(t);for(int casee = 1; casee <= t; casee++)
+   #define en printf("\n")
+   #define mod 1000000007
+   using namespace std;
+   stack<pair<int,int>> st;
+   int parent[200010];
+   int sizee[200010];
+   int findp(int u) {
+      if(parent[u] == u) return u;
+      else return parent[u] = findp(parent[u]);
+   }
+   void uni(int u,int v) {
+     int pu = findp(u);
+     int pv =findp(v);
+   //   printf("%d %d %d %d\n",u,v,pu,pv);
+      if(sizee[pu] < sizee[pv]) swap(pu,pv);
+      parent[pv] = pu;
+      sizee[pu] += sizee[pv]; 
+   }
+   int main() {
+     tcase{
+      int n; sd(n);
+      f(i,n+1) parent[i] = i;
+      f(i,n+1) sizee[i] = 1;
+      vector<int> arr(n,0);
+      map<int,vector<int>> mymap;
+      f(i,n) {sd(arr[i]); mymap[arr[i]].push_back(i);}
+      // int last = 0;
+    //   for(int i = 1; i<=n;i++) {
+    //      if(parent[i]==i) {
+    //         if(last==0) last = i;
+    //         else {
+    //            printf("%d %d %d %d\n",st.top().first,st.top().second,last,i);
+    //            last = i;
+    //            st.pop();
+    //         }
+    //      }
+    //   }
+         ll ans = 0;
+         for(auto& p: mymap) {
+            int u = p.first;
+            int lastvis = -1;
+            for(auto& ind :p.second) {
+              // printf("%d %d p--%d s--%d\n",ind, lastvis,parent[ind+1],sizee[ind+1]);
+               if(ind != 0 && arr[ind-1] <= arr[ind]) {
+                if(lastvis != ind-1) {
+                    uni(ind+1,ind);
+                    ans += (ll)(sizee[findp(ind+1)]-1);
+                } else {
+                    uni(ind+1,ind);
+                }
+               } 
+               lastvis = ind;
+               if(ind != n-1 && arr[ind+1] < arr[ind]) {
+                int agersize = sizee[findp(ind+1)];
+                  uni(ind+1,ind+2);
+                  ans += (ll)(sizee[findp(ind+1)]-agersize);
+                  lastvis += sizee[findp(ind+1)]-agersize;
+               }
+                // printf("%d %d p--%d s--%d\n",ind, lastvis,parent[ind+1],sizee[parent[ind+1]]);
             }
-           }
-          }
-         
-        }
-         printf("%d\n", a[n-1][1]);
-      }
-    }
+
+         }
+         printf("%lld\n",ans);
+     }
+      return 0;
+   }

@@ -1,0 +1,1 @@
+{"name":"Local: emnii","url":"c:\\Users\\Sadi\\Desktop\\c++\\probsolving\\mptlpc\\emnii.cpp","tests":[{"id":1727158477180,"input":"11\n-100 200 300 -1 -2 -3 100 200 300 1 1","output":"7198800\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\Sadi\\Desktop\\c++\\probsolving\\mptlpc\\emnii.cpp","group":"local","local":true}

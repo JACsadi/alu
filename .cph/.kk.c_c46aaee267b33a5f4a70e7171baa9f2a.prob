@@ -1,0 +1,1 @@
+{"name":"Local: kk","url":"c:\\Users\\Sadi\\Desktop\\c++\\probsolving\\mptlpc\\kk.c","tests":[{"id":1705426678725,"input":"1\n5\n4 5 4 5 4","output":"1\n1\n4\n7\n4\n28"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\Sadi\\Desktop\\c++\\probsolving\\mptlpc\\kk.c","group":"local","local":true}

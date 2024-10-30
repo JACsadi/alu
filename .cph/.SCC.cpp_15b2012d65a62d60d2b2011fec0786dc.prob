@@ -1,0 +1,1 @@
+{"name":"Local: SCC","url":"c:\\Users\\Sadi\\Desktop\\c++\\probsolving\\mptlpc\\SCC.cpp","tests":[{"id":1727190557926,"input":"3 3\n1 2 4\n2 3 3\n1 3 8\n1\n","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\Sadi\\Desktop\\c++\\probsolving\\mptlpc\\SCC.cpp","group":"local","local":true}
